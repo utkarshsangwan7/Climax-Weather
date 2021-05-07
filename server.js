@@ -55,6 +55,6 @@ app.post('/weather',(req,res)=>{
 	});
 });
 
-app.listen(2000,()=>{
+app.listen(process.env.PORT||2000,()=>{
 	console.log('Seems as if everything is setup');	
 });
