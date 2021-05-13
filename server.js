@@ -12,6 +12,7 @@ const weatherUrl = `http://api.weatherapi.com/v1/current.json?key=${process.env.
 let latitude = 0;
 let longitude = 0;
 
+
 const getWeatherForecast = (address,respond)=>{
 	const url1 = positionUrl + encodeURIComponent(address);
 	fetch(url1)
