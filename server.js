@@ -8,12 +8,11 @@ const app = express();
 app.use(body_parser.json());
 app.use(cors());
 const positionUrl = `http://www.mapquestapi.com/geocoding/v1/address?key=${process.env.POSITION_KEY}+&location=`;
-const weatherUrl = `http://api.weatherstack.com/current?access_key=${process.env.WEATHER_KEY}&query=`;
+const weatherUrl = `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_KEY}&q=`;
 let latitude = 0;
 let longitude = 0;
 
 const getWeatherForecast = (address,respond)=>{
-	console.log(process.env.POSITION_KEY);
 	const url1 = positionUrl + encodeURIComponent(address);
 	fetch(url1)
 	.then(res=>res.json())
