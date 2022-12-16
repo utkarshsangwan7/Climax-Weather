@@ -2,6 +2,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 const body_parser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -12,6 +13,11 @@ const weatherUrl = `http://api.weatherapi.com/v1/current.json?key=${process.env.
 let latitude = 0;
 let longitude = 0;
 
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+});
 
 const getWeatherForecast = (address,respond)=>{
 	const url1 = positionUrl + encodeURIComponent(address);
