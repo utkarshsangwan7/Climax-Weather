@@ -6,6 +6,11 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
+app.use(express.static(path.resolve(__dirname, "./front/build")));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './front/build', 'index.html'));
+});
 app.use(body_parser.json());
 app.use(cors());
 const positionUrl = `http://www.mapquestapi.com/geocoding/v1/address?key=${process.env.POSITION_KEY}+&location=`;
@@ -13,11 +18,6 @@ const weatherUrl = `http://api.weatherapi.com/v1/current.json?key=${process.env.
 let latitude = 0;
 let longitude = 0;
 
-app.use(express.static(path.resolve(__dirname, "./client/build")));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
-});
 
 const getWeatherForecast = (address,respond)=>{
 	const url1 = positionUrl + encodeURIComponent(address);
